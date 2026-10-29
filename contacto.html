@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pedí tu presupuesto | Toldos Ludmila</title>
+<meta name="description" content="Pedí presupuesto sin cargo para toldos y cerramientos a medida. San Martín, Buenos Aires.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Signika:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+.page{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;padding:64px 0 88px}
+.page h1{font-size:clamp(32px,4vw,46px)}
+.page .intro{font-size:17px}
+.list{margin-top:28px;display:grid}
+.list a,.list>div{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.list .ico{color:var(--green);width:22px;height:22px}
+.list small{display:block;color:var(--muted);font-size:13px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;align-self:start}
+.card h2{font-size:24px;margin-bottom:6px}
+.card>p{color:var(--muted);font-size:15px;margin-bottom:20px}
+.back{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--muted);font-size:15px}
+.back .ico{transform:rotate(180deg)}
+@media(max-width:820px){.page{grid-template-columns:1fr;gap:36px;padding:40px 0 64px}.card{padding:22px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8.5 8.5 0 0 1-12.5 7.5L3 21l1.5-5.5A8.5 8.5 0 1 1 21 12z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7 10-7"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a href="index.html"><img class="logo" src="assets/toldos-ludmila-logo.png" alt="Toldos Ludmila"></a>
+    <a class="back" href="index.html"><svg class="ico"><use href="#i-arrow"/></svg>Volver al inicio</a>
+  </div>
+</header>
+
+<main class="wrap page">
+  <section>
+    <span class="label">Presupuesto sin cargo</span>
+    <h1>Contanos qué espacio querés cubrir</h1>
+    <p class="intro">Te respondemos con la opción que conviene y el precio. Sin compromiso.</p>
+    <div class="list">
+      <a href="https://wa.me/5491156096890?text=Hola%20Toldos%20Ludmila%2C%20quiero%20pedirles%20un%20presupuesto" target="_blank" rel="noopener"><svg class="ico"><use href="#i-chat"/></svg><div>+54 9 11 5609-6890<small>WhatsApp</small></div></a>
+      <a href="tel:+5491156096890"><svg class="ico"><use href="#i-phone"/></svg><div>+54 9 11 5609-6890<small>Teléfono</small></div></a>
+      <a href="mailto:orlandojavierarias@hotmail.com"><svg class="ico"><use href="#i-mail"/></svg><div>orlandojavierarias@hotmail.com<small>Email</small></div></a>
+      <a href="https://maps.google.com/?q=Ricardo+Balb%C3%ADn+4419,+San+Mart%C3%ADn,+Buenos+Aires" target="_blank" rel="noopener"><svg class="ico"><use href="#i-pin"/></svg><div>Ricardo Balbín 4419, San Martín<small>Cómo llegar</small></div></a>
+    </div>
+  </section>
+
+  <section class="card">
+      <h2>Pedí tu presupuesto</h2>
+      <p>Completá tus datos y se abre WhatsApp con el mensaje listo para enviar. Ahí podés sumar fotos del lugar.</p>
+      <form class="form" id="quote">
+        <input type="hidden" name="origen" value="pagina-contacto">
+        <div class="row">
+          <label>Nombre<input name="nombre" required autocomplete="name"></label>
+          <label>Zona / localidad<input name="zona" required></label>
+        </div>
+        <label>Producto
+          <select name="producto">
+            <option value="">No sé, necesito asesoramiento</option>
+            <option>Toldo de brazo invisible</option>
+            <option>Toldo punto recto</option>
+            <option>Toldo vertical para balcones</option>
+            <option>Cerramiento tradicional</option>
+            <option>Cerramiento con guías laterales</option>
+            <option>Cerramiento de lona microperforada</option>
+            <option>Reparación / cambio de lona</option>
+          </select>
+        </label>
+        <label>Comentarios<textarea name="mensaje" rows="4" placeholder="Contanos qué querés cubrir"></textarea></label>
+        <button class="btn" type="submit">Enviar consulta</button>
+      </form>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div>
+      <img class="logo" src="assets/toldos-ludmila-logo.png" alt="Toldos Ludmila">
+      <p style="margin-top:14px;max-width:300px">Toldos y cerramientos a medida. Fabricación, instalación y reparación desde 1981.</p>
+    </div>
+    <div>
+      <h4>Productos</h4>
+      <ul>
+        <li><a href="index.html#productos">Toldo de brazo invisible</a></li>
+        <li><a href="index.html#productos">Toldo punto recto</a></li>
+        <li><a href="index.html#productos">Toldo vertical para balcones</a></li>
+        <li><a href="index.html#productos">Cerramiento tradicional</a></li>
+        <li><a href="index.html#productos">Cerramiento con guías laterales</a></li>
+        <li><a href="index.html#productos">Cerramiento de lona microperforada</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <ul>
+        <li><svg class="ico"><use href="#i-chat"/></svg><a href="https://wa.me/5491156096890?text=Hola%20Toldos%20Ludmila%2C%20quiero%20pedirles%20un%20presupuesto" target="_blank" rel="noopener">+54 9 11 5609-6890</a></li>
+        <li><svg class="ico"><use href="#i-mail"/></svg><a href="mailto:orlandojavierarias@hotmail.com">orlandojavierarias@hotmail.com</a></li>
+        <li><svg class="ico"><use href="#i-pin"/></svg><a href="https://maps.google.com/?q=Ricardo+Balb%C3%ADn+4419,+San+Mart%C3%ADn,+Buenos+Aires" target="_blank" rel="noopener">Ricardo Balbín 4419, San Martín, Buenos Aires</a></li>
+      </ul>
+    </div>
+    <div class="foot-map"><iframe title="Mapa: Ricardo Balbín 4419, San Martín" loading="lazy" src="https://maps.google.com/maps?q=Ricardo%20Balb%C3%ADn%204419%2C%20San%20Mart%C3%ADn%2C%20Buenos%20Aires&z=15&output=embed"></iframe></div>
+    <div class="legal">© Toldos Ludmila · San Martín, Buenos Aires</div>
+  </div>
+</footer>
+<script src="form.js"></script>
+<script src="efectos.js" defer></script>
+</body>
+</html>
