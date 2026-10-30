@@ -332,10 +332,10 @@ dialog::backdrop{background:#0a332ecc}
       <form class="form" id="quote">
         <input type="hidden" name="origen" value="home">
         <div class="row">
-          <label>Nombre<input name="nombre" required autocomplete="name"></label>
+          <label>Nombre completo<input name="nombre" required autocomplete="name" placeholder="Ej. Laura Pérez"></label>
           <label>Teléfono<input name="telefono" required type="tel" inputmode="tel" autocomplete="tel" placeholder="Ej. 11 1234 5678"></label>
         </div>
-        <label>Zona / localidad<input name="zona" required></label>
+        <label>Zona / localidad<input name="zona" required placeholder="Ej. San Martín"></label>
         <label>Producto
           <select name="producto">
             <option value="">No sé, necesito asesoramiento</option>
@@ -348,7 +348,7 @@ dialog::backdrop{background:#0a332ecc}
             <option>Reparación / cambio de lona</option>
           </select>
         </label>
-        <label>Comentarios<textarea name="mensaje" rows="4" placeholder="Contanos qué querés cubrir"></textarea></label>
+        <label>Comentarios<textarea name="mensaje" rows="4" placeholder="Ej. Quiero cubrir una galería de 5 metros de ancho"></textarea></label>
         <button class="btn" type="submit">Enviar consulta</button>
       </form>
     </div>

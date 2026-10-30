@@ -73,6 +73,7 @@ p{margin:0}
 .form label{display:grid;gap:6px;font-size:14px;color:var(--muted)}
 .form input,.form textarea,.form select{width:100%;background:#fff;border:1px solid var(--line);border-radius:6px;padding:11px 12px;outline:none}
 .form input:focus,.form textarea:focus,.form select:focus{border-color:var(--sage);box-shadow:0 0 0 3px var(--sage-soft)}
+.form ::placeholder{color:#9aa6a1}
 .form .note{font-size:13px;color:var(--muted)}
 
 /* WhatsApp flotante */
