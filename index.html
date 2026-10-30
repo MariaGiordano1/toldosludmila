@@ -11,7 +11,9 @@
 <style>
 /* Hero: carrusel a ancho completo */
 .hero{position:relative;height:calc(100vh - 76px);min-height:560px;max-height:920px;overflow:hidden;background:var(--green);color:#fff}
-.slide{position:absolute;inset:0;background:center/cover var(--green-2);opacity:0;transition:opacity .8s ease}
+.slide{position:absolute;inset:0;display:grid;grid-template-columns:1.28fr .72fr;gap:4px;background:var(--green-2);opacity:0;transition:opacity .8s ease}
+.slide-photo{background:center/cover var(--green-2);min-width:0}
+.slide-photo:last-child{background-position:center}
 .slide.on{opacity:1}
 .hero:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#0a332ee6 0%,#0a332eb3 40%,#0a332e1a 75%);pointer-events:none}
 .hero-content{position:relative;z-index:2;height:100%;display:flex;align-items:center}
@@ -79,7 +81,7 @@ section{scroll-margin-top:80px}
 
 /* Nosotros */
 .about{background:var(--sage-soft)}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.about-grid{max-width:720px;margin:0 auto}
 .about .ph{aspect-ratio:4/3;border-radius:var(--radius);background:repeating-linear-gradient(135deg,#d3dfcf 0 12px,#cbd9c7 12px 24px)}
 .about p{margin-top:16px;max-width:520px;color:var(--muted)}
 .stats{display:flex;gap:40px;margin-top:32px;padding-top:24px;border-top:1px solid #b9cbb5}
@@ -149,6 +151,7 @@ dialog::backdrop{background:#0a332ecc}
   .hero{height:auto;min-height:0}
   .hero-content{padding:48px 0 150px}
   .hero:after{background:#0a332ec7}
+  .slide{grid-template-columns:1fr 1fr;gap:2px}
   .hero-nav .wrap{flex-direction:column;align-items:flex-start}
   .grid,.services,.steps{grid-template-columns:1fr}
   .gal{grid-template-columns:1fr;grid-auto-rows:240px}
@@ -236,7 +239,6 @@ dialog::backdrop{background:#0a332ecc}
 
 <section class="block about" id="nosotros">
   <div class="wrap about-grid">
-    <div class="ph"><svg class="ico"><use href="#i-camera"/></svg>Falta foto: equipo o taller<small>Idealmente la familia trabajando o el frente del local</small></div>
     <div>
       <span class="label">Quiénes somos</span>
       <h2>Una empresa familiar con más de 40 años en el oficio</h2>
@@ -329,8 +331,9 @@ dialog::backdrop{background:#0a332ecc}
         <input type="hidden" name="origen" value="home">
         <div class="row">
           <label>Nombre<input name="nombre" required autocomplete="name"></label>
-          <label>Zona / localidad<input name="zona" required></label>
+          <label>Teléfono<input name="telefono" required type="tel" inputmode="tel" autocomplete="tel" placeholder="Ej. 11 1234 5678"></label>
         </div>
+        <label>Zona / localidad<input name="zona" required></label>
         <label>Producto
           <select name="producto">
             <option value="">No sé, necesito asesoramiento</option>
@@ -407,72 +410,68 @@ const img = name => 'assets/fotos/' + name + '.jpg';
 // Fotos según las carpetas del Drive. Lista vacía = se muestra un placeholder "Falta foto".
 const products = [
   {id:'brazo', name:'Toldo de brazo invisible', cat:'Toldos', icon:'i-awning',
-   cover:'brazo-invisible-02',
-   photos:['brazo-invisible-02','brazo-invisible-01','brazo-invisible-04','brazo-invisible-06','brazo-invisible-07','brazo-invisible-08','brazo-invisible-09','brazo-invisible-10','brazo-invisible-12','brazo-invisible-13'],
+   cover:'brazo-01', photos:['brazo-01','brazo-02','brazo-03','brazo-04','brazo-05'],
    text:'Toldo extensible con brazos articulados que se apoyan contra la pared. Da sombra cuando lo abrís y, cerrado, queda recogido sin ocupar lugar.',
    ideal:'Patios, terrazas y frentes de comercio',
    specs:[['i-sun','Protección','Sol directo y lluvia leve'],['i-layers','Sin parantes','No lleva postes al frente, el espacio queda libre'],['i-ruler','Medidas','A medida del frente'],['i-tag','Lona','Nacional o importada, varios colores']]},
   {id:'recto', name:'Toldo punto recto', cat:'Toldos', icon:'i-window',
-   photos:[],
+   cover:'recto-01', photos:['recto-01','recto-02','recto-03','recto-04','recto-05'],
    text:'Toldo clásico para ventanas: la lona baja y se proyecta hacia afuera con brazos laterales, para frenar el sol sin perder ventilación.',
    ideal:'Ventanas, vidrieras y fachadas',
    specs:[['i-sun','Protección','Sol sobre ventanas y vidrieras'],['i-wind','Ventilación','La ventana se puede seguir abriendo'],['i-ruler','Medidas','A medida de cada abertura'],['i-tag','Lona','Nacional o importada, varios colores']]},
   {id:'vertical', name:'Toldo vertical para balcones', cat:'Toldos', icon:'i-awning',
-   photos:[],
+   cover:'vertical-01', photos:['vertical-01','vertical-02','vertical-03','vertical-04','vertical-05'],
    text:'La lona baja en vertical, de arriba hacia el piso o la baranda. Corta el sol de la tarde y da privacidad sin cerrar el balcón.',
    ideal:'Balcones y ventanales',
    specs:[['i-sun','Protección','Sol lateral y de la tarde'],['i-eye','Privacidad','Tapa la vista desde afuera'],['i-ruler','Medidas','A medida del balcón'],['i-tag','Lona','Opaca o microperforada']]},
   {id:'cerramiento', name:'Cerramiento tradicional', cat:'Cerramientos', icon:'i-home',
-   cover:'cerramiento-02',
-   photos:['cerramiento-02','cerramiento-01','cerramiento-03'],
+   cover:'cerramiento-01', photos:['cerramiento-01','cerramiento-02','cerramiento-03','cerramiento-04','cerramiento-05'],
    text:'Cerramiento de lona cristal (transparente) que se enrolla. Te permite usar el quincho o la galería en invierno y abrirlo cuando hace calor.',
    ideal:'Quinchos, galerías, garages y terrazas',
    specs:[['i-wind','Protección','Viento, frío y lluvia'],['i-eye','Visibilidad','Lona cristal: se ve hacia afuera'],['i-ruler','Medidas','A medida de cada vano'],['i-home','Uso','Todo el año']]},
   {id:'guias', name:'Cerramiento con guías laterales', cat:'Cerramientos', icon:'i-home',
-   photos:[],
+   cover:'guias-01', photos:['guias-01','guias-02','guias-03','guias-04','guias-05'],
    text:'La lona sube y baja por guías a los costados, así queda tensa y no se mueve con el viento. Terminación más prolija para vanos grandes.',
    ideal:'Galerías y frentes amplios',
    specs:[['i-wind','Protección','Mejor resistencia al viento'],['i-layers','Guías','Laterales, la lona no se sale'],['i-ruler','Medidas','A medida de cada vano'],['i-home','Uso','Todo el año']]},
   {id:'micro', name:'Cerramiento de lona microperforada', cat:'Cerramientos', icon:'i-home',
-   cover:'microperforada-01',
-   photos:['microperforada-01','microperforada-02'],
+   cover:'micro-01', photos:['micro-01','micro-02'],
    text:'Lona con pequeños orificios que deja pasar el aire y algo de luz. Da sombra y privacidad sin que el espacio quede encerrado.',
    ideal:'Frentes, balcones y espacios que necesitan ventilación',
    specs:[['i-sun','Protección','Sombra parcial'],['i-wind','Ventilación','El aire circula'],['i-eye','Privacidad','Desde afuera casi no se ve'],['i-ruler','Medidas','A medida']]}
 ];
 // Galería: fotos que no se usan en el carrusel ni en las portadas
 const gallery = [
-  ['brazo-invisible-08','Toldo de brazo invisible','Galería junto a la pileta: sombra para toda la zona de la mesa y los sillones.'],
-  ['brazo-invisible-06','Toldo de brazo invisible','Cerrado queda contra la pared y no tapa la vista al jardín.'],
-  ['cerramiento-03','Cerramiento vertical','Corta el sol bajo de la tarde y el viento lateral de la galería.'],
-  ['brazo-invisible-09','Toldo de brazo invisible','Un frente largo cubierto de punta a punta para usar toda la galería.'],
-  ['brazo-invisible-04','Toldo de brazo invisible','Sombra sobre el deck al mediodía; se recoge cuando se quiere sol.']
+  ['brazo-03','Toldo de brazo invisible','Sombra para patios, galerías y terrazas.'],
+  ['recto-03','Toldo punto recto','Protección solar para ventanas y frentes.'],
+  ['vertical-03','Toldo vertical para balcones','Sombra y privacidad para balcones.'],
+  ['cerramiento-03','Cerramiento tradicional','Cierre de lona cristal para usar el espacio todo el año.'],
+  ['guias-03','Cerramiento con guías laterales','Una terminación tensa y prolija para grandes vanos.'],
+  ['micro-02','Lona microperforada','Sombra y circulación de aire.']
 ];
 
 const icon = id => '<svg class="ico"><use href="#' + id + '"/></svg>';
 const ph = name => '<div class="ph">' + icon('i-camera') + 'Falta foto: ' + name + '<small>Pendiente de enviar</small></div>';
 
-// Carrusel: una foto por producto, distinta de las portadas de las tarjetas
+// Carrusel: dos fotos de producto por escena, sin usar muestras ni mecanismos.
 const heroSlides = [
-  ['brazo-invisible-01','brazo'],
-  ['cerramiento-01','cerramiento'],
-  ['brazo-invisible-10','brazo']
+  {photos:['brazo-02','guias-02'], label:'Toldos y cerramientos para exteriores'},
+  {photos:['vertical-02','cerramiento-02'], label:'Soluciones a medida para balcones y galerías'},
+  {photos:['recto-02','micro-01'], label:'Protección solar, privacidad y ventilación'}
 ];
 let cur = 0, timer;
-slides.innerHTML = heroSlides.map(s => '<div class="slide" style="background-image:url(' + img(s[0]) + ')"></div>').join('');
+slides.innerHTML = heroSlides.map(s => '<div class="slide">' + s.photos.map(photo => '<div class="slide-photo" style="background-image:url(' + img(photo) + ')"></div>').join('') + '</div>').join('');
 dots.innerHTML = heroSlides.map((s,i) => '<button aria-label="Foto ' + (i+1) + '" data-i="' + i + '"></button>').join('');
 function go(i){
   cur = (i + heroSlides.length) % heroSlides.length;
   slides.querySelectorAll('.slide').forEach((el,n) => el.classList.toggle('on', n===cur));
   dots.querySelectorAll('button').forEach((el,n) => el.setAttribute('aria-current', n===cur));
-  const p = products.find(x => x.id===heroSlides[cur][1]);
-  slideName.innerHTML = icon(p.icon) + '<a href="#productos" data-id="' + p.id + '">' + p.name + '</a>';
+  slideName.innerHTML = icon('i-camera') + '<a href="#productos">' + heroSlides[cur].label + '</a>';
   clearInterval(timer); timer = setInterval(() => go(cur+1), 6000);
 }
 prev.onclick = () => go(cur-1);
 next.onclick = () => go(cur+1);
 dots.onclick = e => { const b = e.target.closest('button'); if(b) go(+b.dataset.i); };
-slideName.onclick = e => { const a = e.target.closest('a'); if(a){ e.preventDefault(); openSheet(a.dataset.id); } };
 go(0);
 
 // Pasos: aparecen en secuencia cuando la sección entra en pantalla
