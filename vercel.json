@@ -1,0 +1,34 @@
+{
+  "redirects": [
+    {
+      "source": "/galeria(.*)",
+      "destination": "/#trabajos",
+      "permanent": true
+    },
+    {
+      "source": "/(cerramientos|toldos-plegables|toldos-verticales|toldos-punto-recto|toldos-brazo-invisible|toldos|productos)(.*)",
+      "destination": "/#productos",
+      "permanent": true
+    },
+    {
+      "source": "/(contacto|contactenos|contactanos)(/|\\.php)?",
+      "destination": "/contacto.html",
+      "permanent": true
+    },
+    {
+      "source": "/(nosotros|quienes-somos|empresa)(.*)",
+      "destination": "/#nosotros",
+      "permanent": true
+    },
+    {
+      "source": "/(index\\.php|inicio|home)",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sektor1717(.*)",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
+}
