@@ -15,6 +15,7 @@
       content_name: f.get('origen'),
       content_category: f.get('producto') || 'Asesoramiento'
     });
+    if(window.fbq) fbq('track', 'Contact', {content_name: f.get('origen')});
     const lines = ['Hola Toldos Ludmila, quiero pedirles un presupuesto.',
       'Nombre: ' + f.get('nombre'), 'Teléfono: ' + f.get('telefono'), 'Zona: ' + f.get('zona'),
       'Producto: ' + (f.get('producto') || 'Necesito asesoramiento')];
