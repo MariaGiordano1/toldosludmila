@@ -1,34 +1,15 @@
 {
+  "cleanUrls": true,
   "redirects": [
-    {
-      "source": "/galeria(.*)",
-      "destination": "/#trabajos",
-      "permanent": true
-    },
-    {
-      "source": "/(cerramientos|toldos-plegables|toldos-verticales|toldos-punto-recto|toldos-brazo-invisible|toldos|productos)(.*)",
-      "destination": "/#productos",
-      "permanent": true
-    },
-    {
-      "source": "/(contacto|contactenos|contactanos)(/|\\.php)?",
-      "destination": "/contacto.html",
-      "permanent": true
-    },
-    {
-      "source": "/(nosotros|quienes-somos|empresa)(.*)",
-      "destination": "/#nosotros",
-      "permanent": true
-    },
-    {
-      "source": "/(index\\.php|inicio|home)",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/sektor1717(.*)",
-      "destination": "/",
-      "permanent": true
-    }
+    { "source": "/galeria(.*)", "destination": "/#trabajos", "permanent": true },
+    { "source": "/toldos-brazo-invisible(.*)", "destination": "/toldo-brazo-invisible", "permanent": true },
+    { "source": "/toldos-punto-recto(.*)", "destination": "/toldo-punto-recto", "permanent": true },
+    { "source": "/toldos-verticales(.*)", "destination": "/toldo-vertical-balcones", "permanent": true },
+    { "source": "/(cerramientos|toldos-plegables|toldos|productos)(.*)", "destination": "/#productos", "permanent": true },
+    { "source": "/(contactenos|contactanos)(/|\\.php)?", "destination": "/contacto", "permanent": true },
+    { "source": "/contacto(/|\\.php)", "destination": "/contacto", "permanent": true },
+    { "source": "/(nosotros|quienes-somos|empresa)(.*)", "destination": "/#nosotros", "permanent": true },
+    { "source": "/(index\\.php|inicio|home)", "destination": "/", "permanent": true },
+    { "source": "/sektor1717(.*)", "destination": "/", "permanent": true }
   ]
 }

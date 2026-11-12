@@ -69,7 +69,7 @@ section{scroll-margin-top:80px}
 .card ul{list-style:none;padding:0;margin:4px 0 0;display:grid;gap:6px;font-size:14px}
 .card li{display:flex;gap:8px;align-items:center}
 .card li .ico{width:16px;height:16px;color:var(--sage)}
-.card .more{margin-top:auto;align-self:flex-start;background:none;border:0;border-bottom:1px solid var(--green);color:var(--green);padding:10px 0 2px;cursor:pointer;font-size:15px;display:flex;align-items:center;gap:6px}
+.card .more{margin-top:auto;align-self:flex-start;text-decoration:none;background:none;border:0;border-bottom:1px solid var(--green);color:var(--green);padding:10px 0 2px;cursor:pointer;font-size:15px;display:flex;align-items:center;gap:6px}
 
 .tint{background:var(--mist)}
 
@@ -129,28 +129,9 @@ section{scroll-margin-top:80px}
 .form-card h3{font-size:22px;margin-bottom:6px}
 .form-card>p{color:var(--muted);font-size:15px;margin-bottom:20px}
 
-/* Ficha de producto */
-dialog{border:0;padding:0;border-radius:12px;width:min(1000px,calc(100% - 24px));max-height:calc(100vh - 24px);background:var(--paper);color:var(--ink)}
-dialog::backdrop{background:#0a332ecc}
-.sheet{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:start;position:relative}
-.sheet-media{background:var(--mist);padding:16px;min-width:0;align-self:stretch}
-.sheet-main{aspect-ratio:4/3;border-radius:8px;background:center/cover var(--sage-soft)}
-.sheet-media .ph{aspect-ratio:4/3;border-radius:8px}
-.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:8px;margin-top:10px}
-.thumb{width:100%;aspect-ratio:4/3;height:auto;border-radius:5px;border:2px solid transparent;background:center/cover var(--sage-soft);cursor:pointer;padding:0}
-.thumb[aria-current=true]{border-color:var(--green)}
-.sheet-info{padding:30px 30px 28px;position:relative}
-.close{position:absolute;top:14px;right:14px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:6px;cursor:pointer;display:grid}
-.sheet-info h2{font-size:30px;margin:4px 0 12px;padding-right:40px}
-.sheet-info>p{color:var(--muted)}
-.specs{margin:22px 0;border-top:1px solid var(--line)}
-.spec{display:grid;grid-template-columns:22px 110px minmax(0,1fr);gap:10px;padding:11px 0;border-bottom:1px solid var(--line);font-size:15px}
-.spec .ico{color:var(--sage);width:18px;height:18px;margin-top:2px}
-.spec b{font-weight:500}
-.spec span{color:var(--muted)}
 
 @media(max-width:900px){
-  .hero-grid,.about-grid,.contact-grid,.sheet{grid-template-columns:1fr}
+  .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
   .hero-grid{gap:30px}
   .services-grid{grid-template-columns:1fr;gap:28px}
   .gal{grid-template-columns:1fr 1fr;grid-auto-rows:200px}
@@ -158,8 +139,6 @@ dialog::backdrop{background:#0a332ecc}
   .steps{grid-template-columns:1fr 1fr;row-gap:36px}
   .step:nth-child(2):after{display:none}
   .head{display:block}.head .tabs{margin-top:20px}
-  .sheet-info{position:static}
-  .close{top:24px;right:24px;z-index:2}
 }
 @media(max-width:560px){
   .block{padding:64px 0}
@@ -174,8 +153,6 @@ dialog::backdrop{background:#0a332ecc}
   .service:nth-child(even){padding-left:0;border-left:0}
   .step:after{display:none}
   .stats{gap:24px}
-  .spec{grid-template-columns:22px 1fr}.spec span{grid-column:2}
-  .sheet-info{padding:24px 20px}
   .form-card{padding:22px}
 }
 </style>
@@ -222,7 +199,7 @@ dialog::backdrop{background:#0a332ecc}
       <a href="#servicios">Servicios</a>
       <a href="#trabajos">Trabajos</a>
       <a href="#nosotros">Quiénes somos</a>
-      <a class="btn" href="contacto.html">Pedir presupuesto</a>
+      <a class="btn" href="/contacto">Pedir presupuesto</a>
     </nav>
   </div>
 </header>
@@ -375,18 +352,18 @@ dialog::backdrop{background:#0a332ecc}
 <footer class="footer">
   <div class="wrap">
     <div>
-      <img class="logo" src="assets/toldos-ludmila-logo.png" alt="Toldos Ludmila">
+      <img class="logo" src="/assets/toldos-ludmila-logo.png" alt="Toldos Ludmila">
       <p style="margin-top:14px;max-width:300px">Toldos y cerramientos a medida. Fabricación, instalación y reparación desde 1981.</p>
     </div>
     <div>
       <h4>Productos</h4>
       <ul>
-        <li><a href="index.html#productos">Toldo de brazo invisible</a></li>
-        <li><a href="index.html#productos">Toldo punto recto</a></li>
-        <li><a href="index.html#productos">Toldo vertical para balcones</a></li>
-        <li><a href="index.html#productos">Cerramiento tradicional</a></li>
-        <li><a href="index.html#productos">Cerramiento con guías laterales</a></li>
-        <li><a href="index.html#productos">Cerramiento de lona microperforada</a></li>
+        <li><a href="/toldo-brazo-invisible">Toldo de brazo invisible</a></li>
+        <li><a href="/toldo-punto-recto">Toldo punto recto</a></li>
+        <li><a href="/toldo-vertical-balcones">Toldo vertical para balcones</a></li>
+        <li><a href="/cerramiento-tradicional">Cerramiento tradicional</a></li>
+        <li><a href="/cerramiento-guias-laterales">Cerramiento con guías laterales</a></li>
+        <li><a href="/cerramiento-microperforado">Cerramiento de lona microperforada</a></li>
       </ul>
     </div>
     <div>
@@ -404,59 +381,14 @@ dialog::backdrop{background:#0a332ecc}
 <script src="form.js"></script>
 <script src="efectos.js" defer></script>
 
-<dialog id="sheet" aria-labelledby="sheetName">
-  <div class="sheet">
-    <div class="sheet-media"><div id="sheetMain"></div><div class="thumbs" id="thumbs"></div></div>
-    <div class="sheet-info">
-      <button class="close" aria-label="Cerrar ficha" onclick="sheet.close()"><svg class="ico"><use href="#i-x"/></svg></button>
-      <span class="cat" id="sheetCat"></span>
-      <h2 id="sheetName"></h2>
-      <p id="sheetText"></p>
-      <div class="specs" id="specs"></div>
-      <a class="btn" id="sheetCta">Pedir presupuesto</a>
-    </div>
-  </div>
-</dialog>
 
 <a class="wa" href="https://wa.me/5491156096890?text=Hola%20Toldos%20Ludmila%2C%20quiero%20pedirles%20un%20presupuesto" data-ubicacion="whatsapp_flotante" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp"><svg viewBox="0 0 32 32"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.7c-2 0-4-.6-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.7 10.7 0 1 1 16 26.7zm5.9-8c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5v-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.2 1.3 3.4c.2.2 2.3 3.5 5.6 4.9 2.7 1.1 3.3.9 3.9.8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg></a>
 
+<script src="/productos.js"></script>
 <script>
 const WA = '5491156096890';
 const img = name => 'assets/fotos/' + name + '.jpg';
 
-// Fotos según las carpetas del Drive. Lista vacía = se muestra un placeholder "Falta foto".
-const products = [
-  {id:'brazo', name:'Toldo de brazo invisible', cat:'Toldos', icon:'i-awning',
-   cover:'brazo-01', photos:['brazo-01','brazo-02','brazo-03','brazo-04','brazo-05'],
-   text:'Toldo extensible con brazos articulados que se apoyan contra la pared. Da sombra cuando lo abrís y, cerrado, queda recogido sin ocupar lugar.',
-   ideal:'Patios, terrazas y frentes de comercio',
-   specs:[['i-sun','Protección','Sol directo y lluvia leve'],['i-layers','Sin parantes','No lleva postes al frente, el espacio queda libre'],['i-ruler','Medidas','A medida del frente'],['i-tag','Lona','Nacional o importada, varios colores']]},
-  {id:'recto', name:'Toldo punto recto', cat:'Toldos', icon:'i-window',
-   cover:'recto-01', photos:['recto-01','recto-02','recto-03','recto-04','recto-05'],
-   text:'Toldo clásico para ventanas: la lona baja y se proyecta hacia afuera con brazos laterales, para frenar el sol sin perder ventilación.',
-   ideal:'Ventanas, vidrieras y fachadas',
-   specs:[['i-sun','Protección','Sol sobre ventanas y vidrieras'],['i-wind','Ventilación','La ventana se puede seguir abriendo'],['i-ruler','Medidas','A medida de cada abertura'],['i-tag','Lona','Nacional o importada, varios colores']]},
-  {id:'vertical', name:'Toldo vertical para balcones', cat:'Toldos', icon:'i-awning',
-   cover:'vertical-01', photos:['vertical-01','vertical-02','vertical-03','vertical-04','vertical-05'],
-   text:'La lona baja en vertical, de arriba hacia el piso o la baranda. Corta el sol de la tarde y da privacidad sin cerrar el balcón.',
-   ideal:'Balcones y ventanales',
-   specs:[['i-sun','Protección','Sol lateral y de la tarde'],['i-eye','Privacidad','Tapa la vista desde afuera'],['i-ruler','Medidas','A medida del balcón'],['i-tag','Lona','Opaca o microperforada']]},
-  {id:'cerramiento', name:'Cerramiento tradicional', cat:'Cerramientos', icon:'i-home',
-   cover:'cerramiento-01', photos:['cerramiento-01','cerramiento-02','cerramiento-03','cerramiento-04','cerramiento-05'],
-   text:'Cerramiento de lona cristal (transparente) que se enrolla. Te permite usar el quincho o la galería en invierno y abrirlo cuando hace calor.',
-   ideal:'Quinchos, galerías, garages y terrazas',
-   specs:[['i-wind','Protección','Viento, frío y lluvia'],['i-eye','Visibilidad','Lona cristal: se ve hacia afuera'],['i-ruler','Medidas','A medida de cada vano'],['i-home','Uso','Todo el año']]},
-  {id:'guias', name:'Cerramiento con guías laterales', cat:'Cerramientos', icon:'i-home',
-   cover:'guias-01', photos:['guias-01','guias-02','guias-03','guias-04','guias-05'],
-   text:'La lona sube y baja por guías a los costados, así queda tensa y no se mueve con el viento. Terminación más prolija para vanos grandes.',
-   ideal:'Galerías y frentes amplios',
-   specs:[['i-wind','Protección','Mejor resistencia al viento'],['i-layers','Guías','Laterales, la lona no se sale'],['i-ruler','Medidas','A medida de cada vano'],['i-home','Uso','Todo el año']]},
-  {id:'micro', name:'Cerramiento de lona microperforada', cat:'Cerramientos', icon:'i-home',
-   cover:'micro-01', photos:['micro-01','micro-02'],
-   text:'Lona con pequeños orificios que deja pasar el aire y algo de luz. Da sombra y privacidad sin que el espacio quede encerrado.',
-   ideal:'Frentes, balcones y espacios que necesitan ventilación',
-   specs:[['i-sun','Protección','Sombra parcial'],['i-wind','Ventilación','El aire circula'],['i-eye','Privacidad','Desde afuera casi no se ve'],['i-ruler','Medidas','A medida']]}
-];
 // Galería: fotos que no se usan en el carrusel ni en las portadas
 const gallery = [
   ['brazo-03','Toldo de brazo invisible','Sombra para patios, galerías y terrazas.'],
@@ -514,34 +446,15 @@ function render(){
         '<h3>' + p.name + '</h3>' +
         '<p>' + p.text + '</p>' +
         '<ul><li>' + icon('i-check') + p.ideal + '</li><li>' + icon('i-ruler') + 'Fabricado a medida</li></ul>' +
-        '<button class="more" data-id="' + p.id + '">Ver ficha' + icon('i-arrow') + '</button>' +
+        '<a class="more" href="/' + p.slug + '">Ver ficha' + icon('i-arrow') + '</a>' +
       '</div>' +
     '</article>').join('');
 }
 tabs.onclick = e => { const b = e.target.closest('.tab'); if(b){ filter = b.dataset.c; render(); } };
-grid.onclick = e => { const b = e.target.closest('.more'); if(b) openSheet(b.dataset.id); };
 render();
 
 gal.innerHTML = gallery.map(g => '<figure style="background-image:url(' + img(g[0]) + ')" role="img" aria-label="' + g[1] + '"><figcaption><b>' + g[1] + '</b>' + g[2] + '</figcaption></figure>').join('');
 
-function showPhoto(id){
-  sheetMain.innerHTML = '<div class="sheet-main" style="background-image:url(' + img(id) + ')"></div>';
-  thumbs.querySelectorAll('.thumb').forEach(t => t.setAttribute('aria-current', t.dataset.id===id));
-}
-function openSheet(pid){
-  const p = products.find(x => x.id===pid);
-  sheetCat.innerHTML = icon(p.icon) + p.cat;
-  sheetName.textContent = p.name;
-  sheetText.textContent = p.text;
-  specs.innerHTML = [['i-check','Ideal para',p.ideal], ...p.specs, ['i-home','Instalación','Buenos Aires. Envíos al interior']]
-    .map(s => '<div class="spec">' + icon(s[0]) + '<b>' + s[1] + '</b><span>' + s[2] + '</span></div>').join('');
-  sheetCta.href = 'contacto.html?producto=' + encodeURIComponent(p.name);
-  thumbs.innerHTML = p.photos.length > 1 ? p.photos.map(id => '<button class="thumb" data-id="' + id + '" style="background-image:url(' + img(id) + ')" aria-label="Ver foto"></button>').join('') : '';
-  if(p.photos.length) showPhoto(p.photos[0]); else sheetMain.innerHTML = ph(p.name);
-  sheet.showModal();
-}
-thumbs.onclick = e => { const t = e.target.closest('.thumb'); if(t) showPhoto(t.dataset.id); };
-sheet.onclick = e => { if(e.target===sheet) sheet.close(); };
 
 </script>
 </body>

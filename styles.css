@@ -33,7 +33,7 @@ p{margin:0}
 .intro{color:var(--muted);max-width:560px;margin-top:14px}
 
 /* Botones */
-.btn{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--green);background:var(--green);color:#fff;border-radius:6px;padding:12px 18px;font-size:15px;font-weight:500;text-decoration:none;cursor:pointer;transition:background .2s,border-color .2s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid var(--green);background:var(--green);color:#fff;border-radius:6px;padding:12px 18px;font-size:15px;font-weight:500;text-decoration:none;cursor:pointer;transition:background .2s,border-color .2s}
 .btn:hover{background:var(--green-2);border-color:var(--green-2)}
 .btn.ghost{background:transparent;color:var(--green)}
 .btn.ghost:hover{background:var(--mist)}
@@ -67,6 +67,7 @@ p{margin:0}
 .footer li{display:flex;gap:10px;align-items:flex-start;overflow-wrap:anywhere}
 .footer .legal{grid-column:1/-1;display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 20px;border-top:1px solid #ffffff1f;padding-top:20px;margin-top:10px;font-size:13px;color:#8fa59d}
 .footer .credit{font-size:12px;opacity:.75}
+.footer a.credit:hover{opacity:1}
 
 /* Formulario */
 .form{display:grid;gap:14px}
@@ -76,6 +77,14 @@ p{margin:0}
 .form input:focus,.form textarea:focus,.form select:focus{border-color:var(--sage);box-shadow:0 0 0 3px var(--sage-soft)}
 .form ::placeholder{color:#9aa6a1}
 .form .note{font-size:13px;color:var(--muted)}
+
+/* Gracias (form.js): reemplaza el formulario sin cambiar de página */
+.gracias{display:none}
+.is-sent>:not(.gracias){display:none}
+.is-sent .gracias{display:grid;gap:12px;text-align:center;padding:18px 0;outline:none}
+.gracias h3{font-size:24px}
+.gracias p{color:var(--muted)}
+.gracias .link{background:none;border:0;color:var(--green);text-decoration:underline;cursor:pointer;font-size:15px;justify-self:center}
 
 /* WhatsApp flotante */
 .wa{position:fixed;right:20px;bottom:20px;z-index:30;width:56px;height:56px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 6px 18px #0003}
