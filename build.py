@@ -139,7 +139,7 @@ def top():
     <a href="/"><img class="logo" src="/assets/toldos-ludmila-logo.png" alt="Toldos Ludmila"></a>
     <button class="menu-btn" aria-label="Abrir menú" onclick="document.querySelector('.nav').classList.toggle('open')">{ico('i-menu')}</button>
     <nav class="nav">
-      <a href="/#productos">Productos</a>
+      <a href="/productos">Productos</a>
       <a href="/#servicios">Servicios</a>
       <a href="/#trabajos">Trabajos</a>
       <a href="/#nosotros">Quiénes somos</a>
@@ -178,7 +178,7 @@ PAGE_CSS = '''<style>
 .quote-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}
 .quote .intro{color:var(--muted);margin-top:12px}
 .form-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px}
-.others{padding:72px 0}
+.others{padding:8px 0 72px}
 .others ul{list-style:none;padding:0;margin:24px 0 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
 .others a{display:flex;gap:14px;align-items:center;text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:10px;background:#fff}
 .others a:hover{border-color:var(--sage)}
@@ -195,7 +195,7 @@ def product_page(p):
      'image':[SITE+foto(f) for f in p['photos']],'brand':{'@type':'Brand','name':'Toldos Ludmila'},'url':SITE+path},
     {'@type':'BreadcrumbList','itemListElement':[
       {'@type':'ListItem','position':1,'name':'Inicio','item':SITE+'/'},
-      {'@type':'ListItem','position':2,'name':p['cat'],'item':SITE+'/#productos'},
+      {'@type':'ListItem','position':2,'name':'Productos','item':SITE+'/productos'},
       {'@type':'ListItem','position':3,'name':p['name'],'item':SITE+path}]}]}
   extra = (f'<meta property="og:image" content="{SITE}{foto(p["cover"])}">\n'
            f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>\n')
@@ -216,7 +216,7 @@ def product_page(p):
 {top()}
 
 <main>
-  <nav class="wrap crumbs" aria-label="Ubicación"><a href="/">Inicio</a><span>/</span><a href="/#productos">{p['cat']}</a><span>/</span><span>{p['name']}</span></nav>
+  <nav class="wrap crumbs" aria-label="Ubicación"><a href="/">Inicio</a><span>/</span><a href="/productos">Productos</a><span>/</span><a href="/productos#{p['cat'].lower()}">{p['cat']}</a><span>/</span><span>{p['name']}</span></nav>
   <section class="wrap ficha">
     <div class="ficha-media">
       <div class="ficha-main" id="fotoMain" role="img" aria-label="{e(p['name'])}" style="background-image:url({foto(p['photos'][0])})"></div>
@@ -236,6 +236,13 @@ def product_page(p):
     </div>
   </section>
 
+  <section class="wrap others">
+    <h2>Otros productos</h2>
+    <ul>
+      {others}
+    </ul>
+  </section>
+
   <section class="quote" id="presupuesto">
     <div class="wrap quote-grid">
       <div>
@@ -248,13 +255,6 @@ def product_page(p):
       </div>
     </div>
   </section>
-
-  <section class="wrap others">
-    <h2>Otros productos</h2>
-    <ul>
-      {others}
-    </ul>
-  </section>
 </main>
 
 {bottom(wa_text, """<script>
@@ -263,6 +263,79 @@ thumbs.onclick = ev => { const t = ev.target.closest('.thumb'); if(!t) return;
   thumbs.querySelectorAll('.thumb').forEach(b => b.setAttribute('aria-current', b===t)); };
 </script>
 """)}'''
+
+LIST_CSS = '''<style>
+.crumbs{font-size:14px;color:var(--muted);padding:26px 0 0;display:flex;gap:8px;flex-wrap:wrap}
+.crumbs a{text-decoration:none;color:var(--muted)}.crumbs a:hover{color:var(--green)}
+.intro-head{padding:22px 0 8px}
+.intro-head>div{max-width:640px}
+.intro-head h1{font-size:clamp(32px,4vw,46px);margin:6px 0 12px}
+.intro-head p{color:var(--muted);font-size:17px}
+.group{padding:40px 0 24px;scroll-margin-top:90px}
+.group h2{font-size:28px;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.group h2 .ico{width:24px;height:24px;color:var(--sage)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:border-color .2s,box-shadow .2s}
+.card:hover{border-color:var(--sage);box-shadow:0 8px 24px #0d413b14}
+.card .pic{aspect-ratio:4/3;background:center/cover var(--mist)}
+.card-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card h3{font-size:20px}
+.card p{color:var(--muted);font-size:15px}
+.card .ideal{display:flex;gap:8px;align-items:center;font-size:14px}
+.card .ideal .ico{width:16px;height:16px;color:var(--sage)}
+.card .more{margin-top:auto;align-self:flex-start;border-bottom:1px solid var(--green);color:var(--green);padding:10px 0 2px;font-size:15px;display:flex;align-items:center;gap:6px}
+.card .more .ico{width:16px;height:16px}
+.help{margin:48px 0 80px;background:var(--mist);border-radius:var(--radius);padding:32px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.help h2{font-size:24px}.help p{color:var(--muted)}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}.help{padding:24px}}
+</style>'''
+
+def productos_page():
+  groups = ''
+  for cat, icon in [('Toldos','i-awning'),('Cerramientos','i-home')]:
+    cards = '\n'.join(f'''      <a class="card" href="/{p['slug']}">
+        <div class="pic" style="background-image:url({foto(p['cover'])})" role="img" aria-label="{e(p['name'])}"></div>
+        <div class="card-body">
+          <h3>{p['name']}</h3>
+          <p>{p['text']}</p>
+          <span class="ideal">{ico('i-check')}{p['ideal']}</span>
+          <span class="more">Ver ficha{ico('i-arrow')}</span>
+        </div>
+      </a>''' for p in PRODUCTS if p['cat']==cat)
+    groups += f'''
+  <section class="wrap group" id="{cat.lower()}">
+    <h2>{ico(icon)}{cat}</h2>
+    <div class="grid">
+{cards}
+    </div>
+  </section>'''
+  ld = {'@context':'https://schema.org','@type':'ItemList','itemListElement':[
+    {'@type':'ListItem','position':i+1,'name':p['name'],'url':SITE+'/'+p['slug']} for i,p in enumerate(PRODUCTS)]}
+  extra = (f'<meta property="og:image" content="{SITE}/assets/og-image.jpg">\n'
+           f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>\n')
+  return f'''{head('Productos: toldos y cerramientos a medida | Toldos Ludmila', 'Toldos de brazo invisible, punto recto y verticales, y cerramientos de lona a medida. Fabricación e instalación en Buenos Aires desde 1981.', '/productos', extra)}
+{LIST_CSS}
+<script src="/pixel.js"></script>
+</head>
+<body>
+{top()}
+
+<main>
+  <nav class="wrap crumbs" aria-label="Ubicación"><a href="/">Inicio</a><span>/</span><span>Productos</span></nav>
+  <section class="wrap intro-head"><div>
+    <span class="label">Productos</span>
+    <h1>Toldos y cerramientos a medida</h1>
+    <p>Seis líneas de producto, todas fabricadas a medida. Entrá a cada ficha para ver fotos, para qué sirve y pedir presupuesto.</p>
+  </div></section>
+{groups}
+  <div class="wrap"><div class="help">
+    <div><h2>¿No sabés cuál te conviene?</h2><p>Contanos qué espacio querés cubrir y te asesoramos sin cargo.</p></div>
+    <a class="btn" href="/contacto">Pedir asesoramiento</a>
+  </div></div>
+</main>
+
+{bottom('Hola Toldos Ludmila, quiero pedirles un presupuesto')}'''
 
 def gracias_page():
   return f'''{head('¡Gracias por tu consulta! | Toldos Ludmila', 'Recibimos tu consulta. Te respondemos por WhatsApp.', '/gracias', '', '<meta name="robots" content="noindex">\n')}
@@ -288,11 +361,12 @@ if __name__ == '__main__':
   for p in PRODUCTS:
     (ROOT/f'{p["slug"]}.html').write_text(product_page(p))
   (ROOT/'gracias.html').write_text(gracias_page())
+  (ROOT/'productos.html').write_text(productos_page())
   (ROOT/'catalogo.js').write_text('// Generado por build.py: no editar a mano\nconst products = ' +
     json.dumps(PRODUCTS, ensure_ascii=False, indent=1) + ';\n')
   for page in ['index.html', 'contacto.html']:
     replace_footer(page)
-  urls = ['/', '/contacto'] + ['/' + p['slug'] for p in PRODUCTS]
+  urls = ['/', '/productos', '/contacto'] + ['/' + p['slug'] for p in PRODUCTS]
   (ROOT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     ''.join(f'  <url><loc>{SITE}{u}</loc><lastmod>{date.today()}</lastmod></url>\n' for u in urls) + '</urlset>\n')
   print('OK:', len(PRODUCTS), 'fichas + gracias.html + catalogo.js + footer + sitemap')
