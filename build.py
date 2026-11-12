@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Genera las fichas de producto, productos.js y el footer compartido.
+"""Genera las fichas de producto, catalogo.js y el footer compartido.
 
 Fuente única de los datos de producto: la lista PRODUCTS de abajo.
 Correr `python3 build.py` después de cambiar un producto, el footer o el sprite de íconos de index.html.
@@ -288,11 +288,11 @@ if __name__ == '__main__':
   for p in PRODUCTS:
     (ROOT/f'{p["slug"]}.html').write_text(product_page(p))
   (ROOT/'gracias.html').write_text(gracias_page())
-  (ROOT/'productos.js').write_text('// Generado por build.py: no editar a mano\nconst products = ' +
+  (ROOT/'catalogo.js').write_text('// Generado por build.py: no editar a mano\nconst products = ' +
     json.dumps(PRODUCTS, ensure_ascii=False, indent=1) + ';\n')
   for page in ['index.html', 'contacto.html']:
     replace_footer(page)
   urls = ['/', '/contacto'] + ['/' + p['slug'] for p in PRODUCTS]
   (ROOT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     ''.join(f'  <url><loc>{SITE}{u}</loc><lastmod>{date.today()}</lastmod></url>\n' for u in urls) + '</urlset>\n')
-  print('OK:', len(PRODUCTS), 'fichas + gracias.html + productos.js + footer + sitemap')
+  print('OK:', len(PRODUCTS), 'fichas + gracias.html + catalogo.js + footer + sitemap')
