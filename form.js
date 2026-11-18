@@ -46,13 +46,10 @@
         utm_content: ls('utm_content'), utm_term: ls('utm_term'), fbclid: ls('fbclid'),
         fecha: new Date().toISOString()
       };
-      // JSON primero; si el navegador lo bloquea (CORS), reintenta como formulario simple
-      const asForm = () => fetch(GHL_WEBHOOK, {method: 'POST', mode: 'no-cors', keepalive: true,
-        body: new URLSearchParams(data)}).catch(() => {});
+      // Un solo envío "simple" (sin preflight CORS): formulario urlencoded, que GHL acepta
       try {
-        fetch(GHL_WEBHOOK, {method: 'POST', keepalive: true,
-          headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)}).catch(asForm);
-      } catch(_) { asForm(); }
+        fetch(GHL_WEBHOOK, {method: 'POST', mode: 'no-cors', keepalive: true, body: new URLSearchParams(data)}).catch(() => {});
+      } catch(_) {}
     }
     const url = 'https://wa.me/5491156096890?text=' + encodeURIComponent(lines.join('\n'));
     window.open(url, '_blank');
