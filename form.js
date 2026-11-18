@@ -1,5 +1,7 @@
 // Formulario de presupuesto (home, /contacto y fichas de producto)
 (function(){
+  // Webhook entrante del workflow de GoHighLevel (vacío = no envía)
+  const GHL_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/Ly6sbtqfWRrUfWJV5IqL/webhook-trigger/1c90baba-a477-4988-a1a5-672c2cc1144c';
   const form = document.querySelector('#quote');
   if(!form) return;
   const card = form.parentElement;
@@ -27,6 +29,31 @@
     const lines = ['Hola Toldos Ludmila, quiero pedirles un presupuesto.',
       'Nombre: ' + f.get('nombre'), 'Teléfono: ' + f.get('telefono'), 'Zona: ' + f.get('zona'),
       'Producto: ' + (f.get('producto') || 'Necesito asesoramiento')];
+    // Envía el lead a GHL sin frenar WhatsApp ni el /gracias
+    if(GHL_WEBHOOK){
+      const ls = k => { try { return localStorage.getItem(k) || ''; } catch(_) { return ''; } };
+      const nombre = String(f.get('nombre') || '').trim();
+      const data = {
+        full_name: nombre,
+        first_name: nombre.split(' ')[0],
+        last_name: nombre.split(' ').slice(1).join(' '),
+        phone: String(f.get('telefono') || '').trim(),
+        zona: f.get('zona') || '',
+        producto: f.get('producto') || 'Necesito asesoramiento',
+        origen: f.get('origen') || '',
+        pagina: location.href,
+        utm_source: ls('utm_source'), utm_medium: ls('utm_medium'), utm_campaign: ls('utm_campaign'),
+        utm_content: ls('utm_content'), utm_term: ls('utm_term'), fbclid: ls('fbclid'),
+        fecha: new Date().toISOString()
+      };
+      // JSON primero; si el navegador lo bloquea (CORS), reintenta como formulario simple
+      const asForm = () => fetch(GHL_WEBHOOK, {method: 'POST', mode: 'no-cors', keepalive: true,
+        body: new URLSearchParams(data)}).catch(() => {});
+      try {
+        fetch(GHL_WEBHOOK, {method: 'POST', keepalive: true,
+          headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)}).catch(asForm);
+      } catch(_) { asForm(); }
+    }
     const url = 'https://wa.me/5491156096890?text=' + encodeURIComponent(lines.join('\n'));
     window.open(url, '_blank');
 
