@@ -117,3 +117,6 @@ p{margin:0}
 :where(.form-card,.card):has(> #quote){padding:40px 38px}
 :where(.form-card,.card):has(> #quote) > p{margin-bottom:28px}
 @media(max-width:560px){:where(.form-card,.card):has(> #quote){padding:26px 22px}}
+
+/* Oculta el círculo de la Vercel Toolbar (solo lo ve quien tiene sesión de Vercel abierta) */
+vercel-live-feedback,#vercel-live-feedback{display:none!important}
