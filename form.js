@@ -27,7 +27,6 @@
     const lines = ['Hola Toldos Ludmila, quiero pedirles un presupuesto.',
       'Nombre: ' + f.get('nombre'), 'Teléfono: ' + f.get('telefono'), 'Zona: ' + f.get('zona'),
       'Producto: ' + (f.get('producto') || 'Necesito asesoramiento')];
-    if(f.get('mensaje')) lines.push(f.get('mensaje'));
     const url = 'https://wa.me/5491156096890?text=' + encodeURIComponent(lines.join('\n'));
     window.open(url, '_blank');
 

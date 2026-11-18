@@ -101,7 +101,6 @@ def form(origen, selected=''):
             {opts}
           </select>
         </label>
-        <label>Comentarios<textarea name="mensaje" rows="4" placeholder="Ej. Quiero cubrir una galería de 5 metros de ancho"></textarea></label>
         <button class="btn" type="submit">Enviar consulta</button>
       </form>'''
 
