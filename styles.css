@@ -108,3 +108,12 @@ p{margin:0}
 .gal figure.reveal{transform:translateY(28px) scale(.97)}
 .gal figure.reveal.in{transform:none}
 #slides{position:absolute;inset:0;will-change:transform}
+
+/* Formulario con más aire (18/11) */
+#quote{gap:22px}
+#quote label{gap:8px}
+#quote input,#quote select{padding:14px 14px}
+#quote .btn{margin-top:10px;padding:16px 18px}
+:where(.form-card,.card):has(> #quote){padding:40px 38px}
+:where(.form-card,.card):has(> #quote) > p{margin-bottom:28px}
+@media(max-width:560px){:where(.form-card,.card):has(> #quote){padding:26px 22px}}
