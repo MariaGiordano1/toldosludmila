@@ -1,6 +1,7 @@
 {
   "cleanUrls": true,
   "redirects": [
+    { "source": "/:path*", "has": [{ "type": "host", "value": "toldos-ludmila.vercel.app" }], "destination": "https://www.toldos-ludmila.com.ar/:path*", "permanent": true },
     { "source": "/galeria(.*)", "destination": "/#trabajos", "permanent": true },
     { "source": "/toldos-brazo-invisible(.*)", "destination": "/toldo-brazo-invisible", "permanent": true },
     { "source": "/toldos-punto-recto(.*)", "destination": "/toldo-punto-recto", "permanent": true },

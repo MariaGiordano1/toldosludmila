@@ -68,6 +68,8 @@ p{margin:0}
 .footer .legal{grid-column:1/-1;display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 20px;border-top:1px solid #ffffff1f;padding-top:20px;margin-top:10px;font-size:13px;color:#8fa59d}
 .footer .credit{font-size:12px;opacity:.75}
 .footer a.credit:hover{opacity:1}
+.footer .legal a:not(.credit){color:inherit;text-decoration:underline;text-underline-offset:2px}
+.footer .legal a:not(.credit):hover{color:#fff}
 
 /* Formulario */
 .form{display:grid;gap:14px}
@@ -77,6 +79,8 @@ p{margin:0}
 .form input:focus,.form textarea:focus,.form select:focus{border-color:var(--sage);box-shadow:0 0 0 3px var(--sage-soft)}
 .form ::placeholder{color:#9aa6a1}
 .form .note{font-size:13px;color:var(--muted)}
+.form .aviso-datos{font-size:13px;line-height:1.5;color:var(--muted);margin:0}
+.form .aviso-datos a{color:var(--green)}
 
 /* Gracias (form.js): reemplaza el formulario sin cambiar de página */
 .gracias{display:none}

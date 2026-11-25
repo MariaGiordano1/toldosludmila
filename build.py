@@ -13,6 +13,14 @@ ROOT = Path(__file__).parent
 SITE = 'https://www.toldos-ludmila.com.ar'
 WA = '5491156096890'
 MANGO_URL = ''  # URL del sitio de Comunidad Mango para el crédito del footer (pendiente)
+# Datos del responsable para /privacidad. RAZON_SOCIAL vacía = la página muestra un aviso de "COMPLETAR".
+RAZON_SOCIAL = ''
+DOMICILIO = '2 de Abril de 1982 4566, B1653 Villa Ballester, Buenos Aires'
+EMAIL = 'toldosludmila15@gmail.com'
+PRIVACIDAD_FECHA = '25 de noviembre de 2026'  # actualizar al publicar o cambiar la política
+# Etiquetas de medición del <head>: Google primero (define gtag y GADS_*), después el pixel de Meta.
+TRACKING = '<script src="/google.js"></script>\n<script src="/pixel.js"></script>'
+AVISO_DATOS = '<p class="aviso-datos">Al enviar, aceptás que Toldos Ludmila use tus datos para responder tu consulta. Más info en la <a href="/privacidad">política de privacidad</a>.</p>'
 
 PRODUCTS = [
   {'id':'brazo', 'slug':'toldo-brazo-invisible', 'name':'Toldo de brazo invisible', 'cat':'Toldos', 'icon':'i-awning',
@@ -81,7 +89,7 @@ def footer():
       </ul>
     </div>
     <div class="foot-map"><iframe title="Mapa: 2 de Abril de 1982 4566, Villa Ballester" loading="lazy" src="https://maps.google.com/maps?q=2%20de%20Abril%20de%201982%204566%2C%20B1653%20Villa%20Ballester%2C%20Buenos%20Aires&z=15&output=embed"></iframe></div>
-    <div class="legal"><span>© Toldos Ludmila · San Martín, Buenos Aires</span>{credit}</div>
+    <div class="legal"><span>© Toldos Ludmila · San Martín, Buenos Aires · <a href="/privacidad">Política de privacidad</a></span>{credit}</div>
   </div>
 </footer>'''
 
@@ -101,6 +109,7 @@ def form(origen, selected=''):
             {opts}
           </select>
         </label>
+        {AVISO_DATOS}
         <button class="btn" type="submit">Enviar consulta</button>
       </form>'''
 
@@ -208,7 +217,7 @@ def product_page(p):
   view = json.dumps({'content_name':p['name'],'content_category':p['cat'],'content_ids':[p['slug']],'content_type':'product'}, ensure_ascii=False)
   return f'''{head(f'{p["name"]} a medida | Toldos Ludmila', desc, path, extra)}
 {PAGE_CSS}
-<script src="/pixel.js"></script>
+{TRACKING}
 <script>fbq('track', 'ViewContent', {view});</script>
 </head>
 <body>
@@ -315,7 +324,7 @@ def productos_page():
            f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>\n')
   return f'''{head('Productos: toldos y cerramientos a medida | Toldos Ludmila', 'Toldos de brazo invisible, punto recto y verticales, y cerramientos de lona a medida. Fabricación e instalación en Buenos Aires desde 1981.', '/productos', extra)}
 {LIST_CSS}
-<script src="/pixel.js"></script>
+{TRACKING}
 </head>
 <body>
 {top()}
@@ -338,7 +347,7 @@ def productos_page():
 
 def gracias_page():
   return f'''{head('¡Gracias por tu consulta! | Toldos Ludmila', 'Recibimos tu consulta. Te respondemos por WhatsApp.', '/gracias', '', '<meta name="robots" content="noindex">\n')}
-<script src="/pixel.js"></script>
+{TRACKING}
 </head>
 <body>
 {top()}
@@ -352,6 +361,34 @@ def gracias_page():
 
 {bottom('Hola Toldos Ludmila, quiero pedirles un presupuesto')}'''
 
+def privacidad_page():
+  razon = e(RAZON_SOCIAL) if RAZON_SOCIAL else '<mark>[COMPLETAR: razón social de Toldos Ludmila]</mark>'
+  mail = f'<a href="mailto:{EMAIL}">{EMAIL}</a>'
+  return f'''{head('Política de privacidad | Toldos Ludmila', 'Cómo usa Toldos Ludmila los datos que completás en el formulario y los datos de navegación.', '/privacidad')}
+<style>
+.legal-page{{max-width:760px;padding:56px 0 88px}}
+.legal-page h1{{font-size:clamp(30px,4vw,42px);margin-bottom:10px}}
+.legal-page p{{margin-top:16px;color:var(--muted)}}
+.legal-page strong{{color:var(--ink);font-weight:600}}
+</style>
+{TRACKING}
+</head>
+<body>
+{top()}
+
+<main class="wrap legal-page">
+  <h1>Política de privacidad</h1>
+  <p>Última actualización: {PRIVACIDAD_FECHA}</p>
+  <p><strong>Quién es responsable de tus datos:</strong> {razon}, {e(DOMICILIO)}, {mail}.</p>
+  <p><strong>Qué datos tomamos:</strong> los que completás en el formulario (nombre, teléfono, zona, producto y consulta) y datos de navegación (páginas visitadas, cookies e identificadores de los anuncios de Meta y Google por los que llegaste).</p>
+  <p><strong>Para qué los usamos:</strong> para responder tu consulta y enviarte el presupuesto, y para medir qué anuncios funcionan y mostrar publicidad más relevante.</p>
+  <p><strong>Con quién los compartimos:</strong> con los proveedores que usamos para eso: GoHighLevel (gestión de contactos), Meta (Facebook e Instagram) y Google. No vendemos tus datos.</p>
+  <p><strong>Tus derechos:</strong> podés pedir acceder, corregir o borrar tus datos escribiendo a {mail}. La Agencia de Acceso a la Información Pública, órgano de control de la Ley 25.326, atiende denuncias y reclamos sobre el incumplimiento de las normas de protección de datos personales.</p>
+  <p><strong>Cookies:</strong> el sitio usa cookies de Meta y Google para medir los anuncios. Podés borrarlas o bloquearlas desde la configuración de tu navegador.</p>
+</main>
+
+{bottom('Hola Toldos Ludmila, quiero pedirles un presupuesto')}'''
+
 def replace_footer(path):
   f = ROOT/path
   f.write_text(re.sub(r'<footer class="footer">.*?</footer>', lambda m: footer(), f.read_text(), flags=re.S))
@@ -361,11 +398,13 @@ if __name__ == '__main__':
     (ROOT/f'{p["slug"]}.html').write_text(product_page(p))
   (ROOT/'gracias.html').write_text(gracias_page())
   (ROOT/'productos.html').write_text(productos_page())
+  (ROOT/'privacidad.html').write_text(privacidad_page())
   (ROOT/'catalogo.js').write_text('// Generado por build.py: no editar a mano\nconst products = ' +
     json.dumps(PRODUCTS, ensure_ascii=False, indent=1) + ';\n')
   for page in ['index.html', 'contacto.html']:
     replace_footer(page)
-  urls = ['/', '/productos', '/contacto'] + ['/' + p['slug'] for p in PRODUCTS]
+  urls = ['/', '/productos', '/contacto'] + ['/' + p['slug'] for p in PRODUCTS] + ['/privacidad']
   (ROOT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     ''.join(f'  <url><loc>{SITE}{u}</loc><lastmod>{date.today()}</lastmod></url>\n' for u in urls) + '</urlset>\n')
-  print('OK:', len(PRODUCTS), 'fichas + gracias.html + catalogo.js + footer + sitemap')
+  print('OK:', len(PRODUCTS), 'fichas + gracias.html + privacidad.html + catalogo.js + footer + sitemap')
+  if not RAZON_SOCIAL: print('OJO: falta RAZON_SOCIAL en build.py (la política de privacidad muestra "COMPLETAR")')
